@@ -1,0 +1,21 @@
+---
+- name: Configurazione server web
+  hosts: webservers
+  become: yes
+  
+  tasks:
+    - name: Installa Apache
+      apt:
+        name: apache2
+        state: present
+        
+    - name: Avvia e abilita Apache
+      systemd:
+        name: apache2
+        state: started
+        enabled: yes
+        
+    - name: Crea una pagina HTML di benvenuto
+      copy:
+        content: "<html><body><h1>Benvenuto sul {{ inventory_hostname }}</h1></body></html>"
+        dest: /var/www/html/index.html

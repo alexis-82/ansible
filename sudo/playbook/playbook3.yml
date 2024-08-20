@@ -1,0 +1,11 @@
+# playbook.yml
+- name: Configurare i server
+  hosts: servers
+  become: yes
+  tasks:
+    - copy:
+		src: /home/alessio/ciccio.txt
+		dest: /home/alessio/ciccio
+		owner: alessio
+		group: alessio
+		mode: 0644

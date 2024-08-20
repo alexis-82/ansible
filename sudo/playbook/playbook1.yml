@@ -1,0 +1,21 @@
+# playbook.yml
+- name: Configurare i server
+  hosts: servers
+  become: yes
+  tasks:
+    - name: Aggiornare i pacchetti
+      apt:
+        update_cache: yes
+        upgrade: dist
+      when: ansible_os_family == "Debian"
+
+    - name: Installare un pacchetto
+      apt:
+        name: yt-dlp
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Creare una directory
+      file:
+        path: /tmp/example_dir
+        state: directory

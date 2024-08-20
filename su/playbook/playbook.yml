@@ -1,0 +1,11 @@
+---
+- hosts: servers
+  become: yes
+  become_method: su
+  become_user: root  # L'utente con cui vuoi eseguire i comandi.
+
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
